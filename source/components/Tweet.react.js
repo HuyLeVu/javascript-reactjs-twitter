@@ -1,58 +1,56 @@
 var React = require('react');
-var ReactDOM = require('react-dom');
-var Header = require('./Header.react');
-var Tweet = require('./Tweet.react');
 
-var StreamTweet = React.createClass({
+var tweetStyle = {
+    position: 'relative',
+    display: 'inline-block',
+    width: '300px',
+    height: '400px',
+    margin: '10px'
+};
 
-    getInitialState: function () {
-        console.log('[StreamTweet] Tweet : 1. Running getInitialState()');
+var imageStyle = {
+    maxHeight: '400px',
+    boxShadow: '0px 1px 1px 0px #aaa',
+    border: '1px solid #fff'
+};
 
-        return {
-            numberOfCharactersIsIncreasing: null,
-            headerText: null
-        };
+var Tweet = React.createClass({
+
+    propTypes: {
+        tweet: function(properties, propertyName, componentName) {
+            var tweet = properties[propertyName];
+
+            if (! tweet) {
+                return new Error('Tweet must be set.');
+            }
+
+            if (! tweet.media) {
+                return new Error('Tweet must have an image.');
+            }
+        },
+        onImageClick: React.PropTypes.func
     },
 
-    componentWillMount: function () {
-        console.log('[StreamTweet] Tweet: 2. Running componentWillMount()');
+    handleImageClick: function () {
+        var tweet = this.props.tweet;
+        var onImageClick = this.props.onImageClick;
 
-        this.setState({
-            numberOfCharactersIsIncreasing: true,
-            headerText: '[Tweet] Latest public photo from Twitter'
-        });
-
-        window.snapterest = {
-            numberOfReceivedTweets: 1,
-            numberOfDisplayedTweets: 1
-        };
-    },
-
-    componentDidMount: function () {
-        console.log('[Tweet] Tweet: 3. Running componentDidMount()');
-
-        var componentDOMRepresentation = ReactDOM.findDOMNode(this);
-        window.snapterest.headerHtml = componentDOMRepresentation.children[0].outerHTML;
-        window.snapterest.tweetHtml = componentDOMRepresentation.children[1].outerHTML;
-    },
-
-    componentWillUnmount: function () {
-        console.log('[Tweet] Tweet: 8. Running componentWillUnmount()');
-        delete window.snapterest;
+        if (onImageClick) {
+            console.log("Tweet : 1) handle Image click" )
+            onImageClick(tweet);
+        }
     },
 
     render: function () {
-        console.log('[Tweet] : Running render()');
+        var tweet = this.props.tweet;
+        var tweetMediaUrl = tweet.media[0].url;
 
         return (
-            <section>
-                <Header text={this.state.headerText} />
-                <Tweet
-                    tweet={this.props.tweet}
-                    onImageClick={this.props.onAddTweetToCollection} />
-            </section>
+            <div style={tweetStyle}>
+                <img src={tweetMediaUrl} onClick={this.handleImageClick} style={imageStyle} />
+            </div>
         );
     }
 });
 
-module.exports = StreamTweet;
+module.exports = Tweet;

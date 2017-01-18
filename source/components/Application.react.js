@@ -9,6 +9,7 @@ var Application = React.createClass({
         };
     },
     addTweetToCollection: function (tweet) {
+        console.log("Application : Image is clicked")
         var collectionTweets = this.state.collectionTweets;
         collectionTweets[tweet.id] = tweet;
         this.setState({
