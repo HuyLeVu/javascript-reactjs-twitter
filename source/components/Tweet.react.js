@@ -6,7 +6,7 @@ var Tweet = require('./Tweet.react');
 var StreamTweet = React.createClass({
 
     getInitialState: function () {
-        console.log('[Snapterest] StreamTweet: 1. Running getInitialState()');
+        console.log('[StreamTweet] Tweet : 1. Running getInitialState()');
 
         return {
             numberOfCharactersIsIncreasing: null,
@@ -15,11 +15,11 @@ var StreamTweet = React.createClass({
     },
 
     componentWillMount: function () {
-        console.log('[Snapterest] StreamTweet: 2. Running componentWillMount()');
+        console.log('[StreamTweet] Tweet: 2. Running componentWillMount()');
 
         this.setState({
             numberOfCharactersIsIncreasing: true,
-            headerText: 'Latest public photo from Twitter'
+            headerText: '[Tweet] Latest public photo from Twitter'
         });
 
         window.snapterest = {
@@ -29,7 +29,7 @@ var StreamTweet = React.createClass({
     },
 
     componentDidMount: function () {
-        console.log('[Snapterest] StreamTweet: 3. Running componentDidMount()');
+        console.log('[Tweet] Tweet: 3. Running componentDidMount()');
 
         var componentDOMRepresentation = ReactDOM.findDOMNode(this);
         window.snapterest.headerHtml = componentDOMRepresentation.children[0].outerHTML;
@@ -37,13 +37,12 @@ var StreamTweet = React.createClass({
     },
 
     componentWillUnmount: function () {
-        console.log('[Snapterest] StreamTweet: 8. Running componentWillUnmount()');
-
+        console.log('[Tweet] Tweet: 8. Running componentWillUnmount()');
         delete window.snapterest;
     },
 
     render: function () {
-        console.log('[Snapterest] StreamTweet: Running render()');
+        console.log('[Tweet] : Running render()');
 
         return (
             <section>
