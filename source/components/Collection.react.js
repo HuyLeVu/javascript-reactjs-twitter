@@ -1,14 +1,14 @@
 var React = require('react');
 var ReactDOMServer = require('react-dom/server');
-//var CollectionControls = require('./CollectionControls.react');
-//var TweetList = require('./TweetList.react');
+var CollectionControls = require('./CollectionControls.react');
+var TweetList = require('./TweetList.react');
 var Header = require('./Header.react');
 
 var Collection = React.createClass({
 
     createHtmlMarkupStringOfTweetList: function () {
         var htmlString = ReactDOMServer.renderToStaticMarkup(
-          /*  <TweetList tweets={this.props.tweets} />*/
+            <TweetList tweets={this.props.tweets} />
         );
 
         var htmlMarkup = {
@@ -37,14 +37,14 @@ var Collection = React.createClass({
 
             return (
                 <div>
-                    /*<CollectionControls
+                    <CollectionControls
                         numberOfTweetsInCollection={numberOfTweetsInCollection}
                         htmlMarkup={htmlMarkup}
-                        onRemoveAllTweetsFromCollection={removeAllTweetsFromCollection} />*/
+                        onRemoveAllTweetsFromCollection={removeAllTweetsFromCollection} />
 
-                   /* <TweetList
+                    <TweetList
                         tweets={tweets}
-                        onRemoveTweetFromCollection={handleRemoveTweetFromCollection} />*/
+                        onRemoveTweetFromCollection={handleRemoveTweetFromCollection} />
                 </div>
             );
         }
